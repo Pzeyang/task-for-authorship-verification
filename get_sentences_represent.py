@@ -2,9 +2,10 @@ from keras.models import  Model
 from bert4keras.tokenizers import Tokenizer
 from bert4keras.snippets import sequence_padding, DataGenerator, text_segmentate, to_array
 from preprocess_and_finetune_model import get_data
-from bert4keras.models import build_transformer_model
+from keras.layers import Dropout, Dense, Lambda, LSTM, GlobalAveragePooling1D
 import numpy as np
 from tqdm import tqdm
+from bert4keras.models import build_transformer_model
 
 maxlen = 256
 batch_size = 30

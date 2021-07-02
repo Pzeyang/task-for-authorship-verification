@@ -1,6 +1,7 @@
 # task-for-authorship-verification
 任务：small_dataset有52601对大文本文档，目标是根据作者写作风格来判断一对文档是否由同一个作者所写，属于二分类任务。
 本项目代码运行步骤如下：
+
 1.preprocess_and_finetune_model.py
 
 2.get_sentences_represent.py

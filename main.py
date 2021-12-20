@@ -58,15 +58,7 @@ def main():
     test_path = args.c
     answers_path = args.o
 
-    i=1
-    while i:
-        try:
-            data = get_data(test_path + '/pairs.jsonl')
-            if data:
-                i-=1
-        except:
-            continue
-
+    data = get_data(test_path + '/pairs.jsonl')
     print(len(data))
 
     maxlen = 256
@@ -97,21 +89,20 @@ def main():
     # 转换数据集
     generator = data_generator(data, batch_size)
 
-    bert0 = build_transformer_model(
+    bert = build_transformer_model(
         config_path=config_path,
         checkpoint_path=checkpoint_path,
-        # with_pool=True,
         return_keras_model=False,
         num_hidden_layers=12,
     )
 
-    output1 = Lambda(lambda x: x[:, 0])(bert0.model.output)
-    output = Dropout(rate=0.2)(output1)
+    output = Lambda(lambda x: x[:, 0])(bert.model.output)
+    output = Dropout(rate=0.2)(output)
     output = Dense(units=2, activation='softmax', )(output)
 
     model = keras.models.Model(bert0.model.inputs, output)
 
-    model.load_weights('/home/peng21/home/4_model.weights')  #加载微调后的权重
+    model.load_weights('/home/peng21/home/model.weights')  #加载微调后的权重
 
     cls_layer = Model(inputs=model.input, outputs=model.layers[-3].output)
 

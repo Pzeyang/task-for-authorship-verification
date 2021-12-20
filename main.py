@@ -58,8 +58,8 @@ def main():
     test_path = args.c
     answers_path = args.o
 
-    data = get_data(test_path + '/pairs.jsonl')
-    print(len(data))
+    test_data = get_data(test_path + '/pairs.jsonl')
+    print(len(test_data))
 
     maxlen = 256
     batch_size = 1
@@ -87,7 +87,7 @@ def main():
                         batch_token_ids, batch_segment_ids = [], []
 
     # 转换数据集
-    generator = data_generator(data, batch_size)
+    test_generator = data_generator(test_data, batch_size)
 
     bert = build_transformer_model(
         config_path=config_path,
@@ -131,13 +131,13 @@ def main():
 
         return sents_rs
 
-    sents_r = get_sents_represent(generator, len(data))
+    test_sents_r = get_sents_represent(test_generator, len(data))
 
-    res = n_model.predict(sents_r)
+    res = n_model.predict(test_sents_r)
     n_res = np.argmax(res, axis=-1)
 
     with open(answers_path + '/answers.jsonl', 'w') as f:
-        for index, value in enumerate(data):
+        for index, value in enumerate(test_data):
             dic = {"id": value[-1], "value": n_res[index]}
             f.write(json.dumps(dic, cls=NpEncoder))
             f.write('\n')

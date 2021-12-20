@@ -53,17 +53,17 @@ def get_data(truth_path, text_path):
 
     return datas
 
-truth_path = 'D:\PAN\pan20-authorship-verification-training-small\dataset\pan20-authorship-verification-training-small-truth.jsonl'
-text_path = 'D:\PAN\pan20-authorship-verification-training-small\dataset\pan20-authorship-verification-training-small.jsonl'
+truth_path = '..\pan20-authorship-verification-training-small-truth.jsonl'
+text_path = '..\pan20-authorship-verification-training-small.jsonl'
 data = get_data(truth_path,text_path)
 data = data[:36821] #这里是取出70%当训练集进行微调
 
 maxlen = 256
 batch_size = 30
 
-config_path = 'D:\PAN\dataset\cased_L-12_H-768_A-12/bert_config.json'
-checkpoint_path = 'D:\PAN\dataset\cased_L-12_H-768_A-12/bert_model.ckpt'
-dict_path = 'D:\PAN\dataset\cased_L-12_H-768_A-12/vocab.txt'
+config_path = '..\cased_L-12_H-768_A-12\bert_config.json'
+checkpoint_path = '..\cased_L-12_H-768_A-12\bert_model.ckpt'
+dict_path = '..\cased_L-12_H-768_A-12\vocab.txt'
 
  # 建立分词器
 tokenizer = Tokenizer(dict_path, do_lower_case=False)
@@ -109,8 +109,8 @@ bert0 = build_transformer_model(
     num_hidden_layers=12,
 )
 
-output1 = Lambda(lambda x: x[:, 0])(bert0.model.output)
-output = Dropout(rate=0.2)(output1)
+output = Lambda(lambda x: x[:, 0])(bert0.model.output)
+output = Dropout(rate=0.2)(output)
 output = Dense(units=2, activation='softmax', )(output)
 
 model = keras.models.Model(bert0.model.inputs, output)

@@ -52,6 +52,7 @@ output = Dropout(rate=0.1)(output)
 output = Dense(units=2, activation='softmax', )(output)
 
 model = Model(bert.model.inputs, output)
+model.load_weights('/home/peng21/home/4_model.weights')  #加载微调后的权重
 
 cls_layer = Model(inputs=model.input, outputs=model.layers[-3].output)  #后面会从cls_layer提取cls向量作为句子表示
 

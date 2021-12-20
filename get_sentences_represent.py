@@ -44,12 +44,11 @@ test_generator = data_generator(data[36821:], batch_size)
 bert = build_transformer_model(
     config_path=config_path,
     checkpoint_path=checkpoint_path,
-    # with_pool=True,
     return_keras_model=False,
     num_hidden_layers=12,
 )
-output1 = Lambda(lambda x: x[:, 0])(bert.model.output)
-output = Dropout(rate=0.2)(output1)
+output = Lambda(lambda x: x[:, 0])(bert.model.output)
+output = Dropout(rate=0.1)(output)
 output = Dense(units=2, activation='softmax', )(output)
 
 model = Model(bert.model.inputs, output)

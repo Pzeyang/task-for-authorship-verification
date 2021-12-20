@@ -64,9 +64,9 @@ def main():
     maxlen = 256
     batch_size = 1
 
-    config_path = '/home/peng21/home/cased_L-12_H-768_A-12/bert_config.json'
-    checkpoint_path = '/home/peng21/home/cased_L-12_H-768_A-12/bert_model.ckpt'
-    dict_path = '/home/peng21/home/cased_L-12_H-768_A-12/vocab.txt'
+    config_path = '../cased_L-12_H-768_A-12/bert_config.json'
+    checkpoint_path = '../cased_L-12_H-768_A-12/bert_model.ckpt'
+    dict_path = '../cased_L-12_H-768_A-12/vocab.txt'
 
     tokenizer = Tokenizer(dict_path, do_lower_case=False)
 

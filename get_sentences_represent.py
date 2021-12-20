@@ -10,9 +10,9 @@ from bert4keras.models import build_transformer_model
 maxlen = 256
 batch_size = 30
 
-config_path = 'dataset/cased_L-12_H-768_A-12/bert_config.json'
-checkpoint_path = 'dataset/cased_L-12_H-768_A-12/bert_model.ckpt'
-dict_path = 'dataset/cased_L-12_H-768_A-12/vocab.txt'
+config_path = '../cased_L-12_H-768_A-12/bert_config.json'
+checkpoint_path = '../cased_L-12_H-768_A-12/bert_model.ckpt'
+dict_path = '../cased_L-12_H-768_A-12/vocab.txt'
 
  # 建立分词器
 tokenizer = Tokenizer(dict_path, do_lower_case=False)

@@ -102,7 +102,7 @@ def main():
 
     model = keras.models.Model(bert0.model.inputs, output)
 
-    model.load_weights('/home/peng21/home/model.weights')  #加载微调后的权重
+    model.load_weights('/home/peng21/home/4_model.weights')  #加载微调后的权重
 
     cls_layer = Model(inputs=model.input, outputs=model.layers[-3].output)
 

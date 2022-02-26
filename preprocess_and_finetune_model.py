@@ -55,6 +55,7 @@ def get_data(truth_path, text_path):
 
 truth_path = '..\pan20-authorship-verification-training-small-truth.jsonl'
 text_path = '..\pan20-authorship-verification-training-small.jsonl'
+save_weight_path = '/home/peng21/home/'
 data = get_data(truth_path,text_path)
 data = data[:36821] #这里是取出70%当训练集进行微调
 
@@ -98,7 +99,7 @@ class Evaluator(keras.callbacks.Callback):
 
     def on_epoch_end(self, epoch, logs=None):
 
-        model.save_weights('/home/peng21/home/'+str(epoch) +'_model.weights')
+        model.save_weights(save_weight_path+str(epoch) +'_model.weights')
 
 evaluator = Evaluator()
 

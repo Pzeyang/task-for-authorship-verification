@@ -81,7 +81,7 @@ class data_generator(DataGenerator):
                 batch_token_ids.append(token_ids)
                 batch_segment_ids.append(segment_ids)
                 batch_labels.append([label])
-                if len(batch_labels)//30 == self.batch_size or is_end:
+                if len(batch_labels) == self.batch_size or is_end:
                     batch_token_ids = sequence_padding(batch_token_ids)
                     batch_segment_ids = sequence_padding(batch_segment_ids)
                     batch_labels = sequence_padding(batch_labels)

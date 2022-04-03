@@ -1,6 +1,6 @@
 import numpy as np
 
-from preprocess_and_finetune_model import get_data
+from preprocess_and_finetune_model import *
 data = get_data(truth_path,text_path)
 
 labels=[]
